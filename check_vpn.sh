@@ -1,6 +1,11 @@
 #!/bin/bash
 
 # Name of VPN interface (often tun0, ppp0 or utunX)
+# VPN Type	 Interface examples
+# OpenVPN	   tun0, tun1, etc.
+# WireGuard	 wg0, wg1
+# L2TP/IPSec ppp0
+# macOS VPN	 utun0, utun1
 VPN_INTERFACE="tun|ppp|wg|utun"
 CHECK_INTERVAL=30 #seconds
 VPN_STATUS=""
