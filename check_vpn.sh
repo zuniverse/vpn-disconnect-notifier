@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Name of VPN interface (often tun0, ppp0 or utunX)
-VPN_INTERFACE="tun0"
+VPN_INTERFACE="tun|ppp|wg|utun"
 CHECK_INTERVAL=30 #seconds
 VPN_STATUS=""
 
@@ -22,7 +22,7 @@ function notify() {
 
 while true; do
   # Check if VPN interface exists
-  if ip link show "$VPN_INTERFACE" >/dev/null 2>&1; then
+  if ip link | grep -E "$VPN_INTERFACE" >/dev/null 2>&1; then
     if [[ "$VPN_STATUS" == "disconnected" || "$VPN_STATUS" == "" ]]; then
       echo "✅ VPN ($VPN_INTERFACE) connected."
       VPN_STATUS="connected"
