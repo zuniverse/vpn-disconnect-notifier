@@ -37,7 +37,7 @@ while true; do
     # Echo only 1 notification, and optionally open only 1 new terminal window for even more visibility
     if [ "$VPN_STATUS" == "connected" ]; then
       echo "❌ VPN ($VPN_INTERFACE) disconnected !"
-      gnome-terminal -- bash -c "echo 'VPN disconnected !'; bash"
+      # gnome-terminal -- bash -c "echo 'VPN disconnected !'; bash" # open a new terminal window for even more visibility
       VPN_STATUS="disconnected"
     fi
   fi
