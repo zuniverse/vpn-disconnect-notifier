@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#########################################################################
+# Simple bash script that checks every x seconds if VPN is connected.
+# If VPN is disconnected, it sends a notification on the user's screen.
+# And optionnally opens a new terminal window for even more visibility.
+#########################################################################
+
 # Name of VPN interface (often tun0, ppp0 or utunX)
 # VPN Type	 Interface examples
 # OpenVPN	   tun0, tun1, etc.
