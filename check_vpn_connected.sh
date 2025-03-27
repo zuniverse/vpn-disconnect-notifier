@@ -39,9 +39,17 @@ while true; do
       VPN_STATUS="connected"
     fi
   else
-    notify "AWS VPN disconnected !"
+    # Check that session is not locked to avoid sending notifications that will wake up screen saver
+    # the following command will return either (false,) or (true,)
+    IS_SESSION_LOCKED=$(gdbus call --session \
+      --dest org.gnome.ScreenSaver \
+      --object-path /org/gnome/ScreenSaver \
+      --method org.gnome.ScreenSaver.GetActive)
+    if [[ "$IS_SESSION_LOCKED" == "(false,)" ]]; then
+      notify "AWS VPN disconnected !"
+    fi
     # Echo only 1 notification, and optionally open only 1 new terminal window for even more visibility
-    if [ "$VPN_STATUS" == "connected" ]; then
+    if [ "$VPN_STATUS" != "disconnected" ]; then
       echo "❌ VPN ($VPN_INTERFACE) disconnected !"
       # gnome-terminal -- bash -c "echo 'VPN disconnected !'; bash" # open a new terminal window for even more visibility
       VPN_STATUS="disconnected"
